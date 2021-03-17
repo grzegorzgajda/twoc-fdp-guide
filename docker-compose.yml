@@ -1,0 +1,48 @@
+version: '3'
+services:
+  fdp:
+    image: fairdata/fairdatapoint:1.8.0
+    restart: always
+    volumes:
+      - ./fdp/application.yml:/fdp/application.yml:ro
+    networks:
+      - default
+      - graphdb_net
+
+  fdp-client:
+    image: fairdata/fairdatapoint-client:1.8.0
+    restart: always
+    environment:
+      - FDP_HOST=fdp
+    volumes:
+      - ./fdp-client/assets:/usr/share/nginx/html/assets:ro
+      - ./fdp-client/_variables.scss:/src/scss/custom/_variables.scss:ro
+    networks:
+      - default
+
+  mongo:
+    image: mongo:4.2.3
+    restart: always
+    ports:
+      - "127.0.0.1:27017:27017"
+    volumes:
+      - ./mongo/data:/data/db
+    networks:
+      - default
+
+  proxy:
+    image: nginx:1.17
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./proxy/nginx:/etc/nginx:ro
+      - ./proxy/letsencrypt:/var/www/letsencrypt:ro
+      - /etc/letsencrypt:/etc/letsencrypt:ro
+    networks:
+      - default
+
+networks:
+  graphdb_net:
+    external: true

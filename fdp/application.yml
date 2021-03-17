@@ -1,0 +1,10 @@
+instance:
+  clientUrl: https://twoc-test.fair-dtls.surf-hosted.nl
+
+repository:
+  type: 4
+  graphDb:
+    url: http://graphdb:7200
+    repository: fdp
+    username: ""
+    password: ""
