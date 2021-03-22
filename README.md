@@ -68,3 +68,12 @@ nano proxy/nginx/nginx.conf # and uncomment the include line
 nano proxy/nginx/fdp.conf # update domains
 docker-compose up -d
 ```
+
+### certificate renewal hooks
+```sh
+sudo tee /etc/letsencrypt/renewal-hooks/post/001-restart-docker-proxy.sh <<EOL
+#!/bin/sh
+docker restart twoc-deployment_proxy_1
+EOL
+sudo chmod +x /etc/letsencrypt/renewal-hooks/post/001-restart-docker-proxy.sh
+```
