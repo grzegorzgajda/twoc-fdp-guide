@@ -1,5 +1,5 @@
 instance:
-  clientUrl: https://twoc-test.fair-dtls.surf-hosted.nl
+  clientUrl: https://twoc.example.com
 
 repository:
   type: 4
