@@ -1,7 +1,7 @@
 version: '3'
 services:
   fdp:
-    image: fairdata/fairdatapoint:1.8.0
+    image: fairdata/fairdatapoint:1.12.4
     restart: always
     volumes:
       - ./fdp/application.yml:/fdp/application.yml:ro
@@ -10,7 +10,7 @@ services:
       - graphdb_net
 
   fdp-client:
-    image: fairdata/fairdatapoint-client:1.8.0
+    image: fairdata/fairdatapoint-client:1.12.0
     restart: always
     environment:
       - FDP_HOST=fdp

@@ -11,7 +11,7 @@ newgrp docker
 
 https://docs.docker.com/compose/install/#install-compose-on-linux-systems
 ```sh
-sudo curl -L "https://github.com/docker/compose/releases/download/1.28.5/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
 ```
 
@@ -20,16 +20,16 @@ https://www.ontotext.com/products/graphdb/graphdb-free/
 
 from the email -> "Download as a stand-alone server"
 
-graphdb-free-9.6.0-dist.zip
+graphdb-free-9.10.1-dist.zip
 
 ```sh
 sudo mkdir /opt/graphdb
 sudo chown $USER:$USER /opt/graphdb
 sudo apt-get install -y -qq git-core
 git clone https://github.com/Ontotext-AD/graphdb-docker.git /opt/graphdb
-mv graphdb-free-9.6.0-dist.zip /opt/graphdb/free-edition
+mv graphdb-free-9.10.1-dist.zip /opt/graphdb/free-edition
 cd /opt/graphdb
-docker-compose build --build-arg version=9.6.0
+docker-compose build --build-arg version=9.10.1
 
 docker network create graphdb_net
 
@@ -70,6 +70,8 @@ docker-compose up -d
 ```
 
 ### certificate renewal hooks
+If the path of the deployment differs from the example path in this guide, adjust the container name accordingly.
+
 ```sh
 sudo tee /etc/letsencrypt/renewal-hooks/post/001-restart-docker-proxy.sh <<EOL
 #!/bin/sh
